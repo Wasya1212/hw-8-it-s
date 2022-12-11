@@ -5,15 +5,15 @@ import 'simplelightbox/dist/simple-lightbox.min.css';
 
 const galleryContainer = document.querySelector('.gallery');
 
-const addImgToGallery = ({ preview, original, description }) => {
-  galleryContainer.innerHTML += `
+const generateGallery = (items, container) => {
+  container.innerHTML = items.reduce((acc, { preview, original, description }) => acc += `
     <a class="gallery__item" href="${original}">
       <img class="gallery__image" src="${preview}" alt=${description}/>
     </a>
-  `;
+  `, '');
 };
 
-galleryItems.map(addImgToGallery);
+generateGallery(galleryItems, galleryContainer);
 
 new SimpleLightbox('div.gallery a', {
   captionsData: 'alt',
